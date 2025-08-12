@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"os"
+
+	"github.com/meopedevts/typedvo-cli/cmd"
+)
 
 func main() {
-	fmt.Println("Bem vindo a CLI do TypedVO")
+	code := cmd.Execute()
+	os.Exit(int(code))
 }
