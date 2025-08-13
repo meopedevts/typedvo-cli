@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	databaseCmd "github.com/meopedevts/typedvo-cli/pkg/cmd/database"
 	"github.com/spf13/cobra"
 )
 
@@ -19,6 +20,8 @@ func Execute() exitCode {
 
 A CLI extrai metadados do banco e cria os arquivos de código correspondentes, simplificando o processo de criação das classes tipadas.`,
 	}
+
+	cmd.AddCommand(databaseCmd.NewCmdDatabase())
 
 	err := cmd.Execute()
 	if err != nil {
