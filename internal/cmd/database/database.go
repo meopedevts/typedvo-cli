@@ -10,8 +10,8 @@ import (
 	view "github.com/meopedevts/typedvo-cli/internal/views/database"
 )
 
-func RenderForm() error {
-	dbConfig, err := view.DatabaseConfigurationForm()
+func Run() error {
+	dbConfig, err := render()
 	if err != nil {
 		return err
 	}
@@ -24,11 +24,19 @@ func RenderForm() error {
 	return nil
 }
 
-func validate(dbConfig *models.DatabaseConfig) error {
+func render() (*models.DatabaseConfig, error) {
+	cfg, err := view.DatabaseConfigurationForm()
+	if err != nil {
+		return nil, err
+	}
+	return cfg, nil
+}
+
+func validate(cfg *models.DatabaseConfig) error {
 	err := spinner.New().
 		Title("🔍 Verificando conexão com banco de dados").
 		ActionWithErr(func(ctx context.Context) error {
-			db, err := db.New(dbConfig)
+			db, err := db.New(cfg)
 			if err != nil {
 				return err
 			}

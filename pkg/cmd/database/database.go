@@ -10,7 +10,7 @@ func NewCmdDatabase() *cobra.Command {
 		Use:   "database",
 		Short: "Configurar banco de dados",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			err := databaseRun()
+			err := database.Run()
 			if err != nil {
 				return err
 			}
@@ -19,13 +19,4 @@ func NewCmdDatabase() *cobra.Command {
 	}
 
 	return cmd
-}
-
-func databaseRun() (err error) {
-	err = database.RenderForm()
-	if err != nil {
-		return err
-	}
-
-	return nil
 }
