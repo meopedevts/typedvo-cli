@@ -1,11 +1,11 @@
 package database
 
 import (
-	"errors"
 	"strconv"
 
 	"github.com/charmbracelet/huh"
 	"github.com/meopedevts/typedvo-cli/internal/models"
+	"github.com/meopedevts/typedvo-cli/internal/views/utils"
 )
 
 func DatabaseConfigurationForm() (*models.DatabaseConfig, error) {
@@ -21,27 +21,27 @@ func DatabaseConfigurationForm() (*models.DatabaseConfig, error) {
 		huh.NewInput().
 			Title("Endereço / IP").
 			Placeholder("127.0.0.1").
-			Validate(requiredValidation).
+			Validate(utils.RequiredValidation).
 			Value(&host),
 		huh.NewInput().
 			Title("Porta").
 			Placeholder("1521").
-			Validate(requiredValidation).
+			Validate(utils.RequiredValidation).
 			Value(&portStr),
 		huh.NewInput().
 			Title("Serviço / SID").
 			Placeholder("XE").
-			Validate(requiredValidation).
+			Validate(utils.RequiredValidation).
 			Value(&serviceName),
 		huh.NewInput().
 			Title("Usuário").
 			Placeholder("oracle").
-			Validate(requiredValidation).
+			Validate(utils.RequiredValidation).
 			Value(&username),
 		huh.NewInput().
 			Title("Senha").
 			Placeholder("******").
-			Validate(requiredValidation).
+			Validate(utils.RequiredValidation).
 			EchoMode(huh.EchoModePassword).
 			Value(&password),
 	).Title("⚙️ Configurando Banco de Dados"))
@@ -63,11 +63,4 @@ func DatabaseConfigurationForm() (*models.DatabaseConfig, error) {
 		Username: username,
 		Password: password,
 	}, nil
-}
-
-func requiredValidation(v string) error {
-	if len(v) <= 1 {
-		return errors.New("Campo obrigatório, deve ser preenchido.")
-	}
-	return nil
 }

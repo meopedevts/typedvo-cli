@@ -2,6 +2,7 @@ package cmd
 
 import (
 	databaseCmd "github.com/meopedevts/typedvo-cli/pkg/cmd/database"
+	generateCmd "github.com/meopedevts/typedvo-cli/pkg/cmd/generate"
 	"github.com/spf13/cobra"
 )
 
@@ -22,6 +23,7 @@ A CLI extrai metadados do banco e cria os arquivos de código correspondentes, s
 	}
 
 	cmd.AddCommand(databaseCmd.NewCmdDatabase())
+	cmd.AddCommand(generateCmd.NewCmdGenerate())
 
 	err := cmd.Execute()
 	if err != nil {
